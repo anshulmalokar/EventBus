@@ -7,7 +7,7 @@ public class Topic {
         this.topic = topic;
     }
 
-    public String getTopic() {
+    public String getValue() {
         return topic;
     }
 }

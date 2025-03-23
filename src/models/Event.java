@@ -5,19 +5,24 @@ import Wrapper.Topic;
 
 import java.util.Map;
 
-public class Event {
+public class  Event {
     private final EventId id;
+    private final String name;
     private final Topic topic;
     private final long timeStamp;
     private final Map<String, Object> attributes;
 
-    public Event(EventId id, Topic topic, long timeStamp, Map<String, Object> attributes) {
+    public Event(EventId id, String name, Topic topic, long timeStamp, Map<String, Object> attributes) {
         this.id = id;
+        this.name = name;
         this.topic = topic;
         this.timeStamp = timeStamp;
         this.attributes = attributes;
     }
 
+    public String getName() {
+        return name;
+    }
 
     public Topic getTopic() {
         return topic;

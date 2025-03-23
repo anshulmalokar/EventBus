@@ -14,21 +14,22 @@ public abstract class RetryAlgorithm<T, R> {
         this.waitTime = waitTime;
     }
 
-    public void retry(Function<T, R> f, T paramater, int attempts) throws RertyLimitReachedException {
+    public R attempt(Function<T, R> f, T paramater, int attempts) throws RertyLimitReachedException {
         try {
-            f.apply(paramater);
+            return f.apply(paramater);
         } catch (Exception e) {
             if (e instanceof RetryableException) {
                 if (attempts == maxAttempts) {
                     throw new RertyLimitReachedException("Limit reached");
                 }
+                R r = attempt(f, paramater, attempts + 1);;
                 long sleepTime = getSleepTime(attempts);
                 try {
                     Thread.sleep(sleepTime);
+                    return r;
                 } catch (InterruptedException ex) {
                     throw new RuntimeException(ex);
                 }
-                retry(f, paramater, attempts + 1);
             }
             throw new RuntimeException();
         }
