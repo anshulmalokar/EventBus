@@ -1,4 +1,4 @@
-package utils;
+package main.java.utils;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -7,10 +7,7 @@ public class Timer {
     private static Timer instance = null;
     private static final Lock mtx = new ReentrantLock();
 
-    private Timer() {
-    }
-
-    ;
+    private Timer() {}
 
     public static Timer getInstance() {
         try {

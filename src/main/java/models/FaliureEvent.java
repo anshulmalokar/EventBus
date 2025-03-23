@@ -1,6 +1,6 @@
-package models;
+package main.java.models;
 
-import Wrapper.EventId;
+import main.java.Wrapper.EventId;
 
 import java.util.UUID;
 

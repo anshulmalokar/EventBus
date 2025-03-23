@@ -1,8 +1,8 @@
-package models;
+package main.java.models;
 
-import Wrapper.EventId;
-import Wrapper.EntityId;
-import Wrapper.Topic;
+import main.java.Wrapper.EventId;
+import main.java.Wrapper.EntityId;
+import main.java.Wrapper.Topic;
 
 import java.util.function.Function;
 

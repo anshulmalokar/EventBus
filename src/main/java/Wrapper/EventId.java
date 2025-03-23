@@ -1,4 +1,4 @@
-package Wrapper;
+package main.java.Wrapper;
 
 public class EventId {
     private String eventId;

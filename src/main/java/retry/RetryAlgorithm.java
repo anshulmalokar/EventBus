@@ -1,7 +1,7 @@
-package retry;
+package main.java.retry;
 
-import Exceptions.RertyLimitReachedException;
-import Exceptions.RetryableException;
+import main.java.Exceptions.RertyLimitReachedException;
+import main.java.Exceptions.RetryableException;
 
 import java.util.function.Function;
 

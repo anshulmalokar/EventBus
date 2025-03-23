@@ -1,4 +1,4 @@
-package Wrapper;
+package main.java.Wrapper;
 
 public class EntityId {
     private String entityId;

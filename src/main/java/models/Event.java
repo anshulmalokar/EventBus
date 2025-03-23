@@ -1,7 +1,7 @@
-package models;
+package main.java.models;
 
-import Wrapper.EventId;
-import Wrapper.Topic;
+import main.java.Wrapper.EventId;
+import main.java.Wrapper.Topic;
 
 import java.util.Map;
 

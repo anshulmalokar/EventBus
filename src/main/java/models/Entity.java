@@ -1,6 +1,6 @@
-package models;
+package main.java.models;
 
-import Wrapper.EntityId;
+import main.java.Wrapper.EntityId;
 
 public class Entity {
     private EntityId entityId;

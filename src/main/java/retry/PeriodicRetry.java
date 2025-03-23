@@ -1,4 +1,4 @@
-package retry;
+package main.java.retry;
 
 public class PeriodicRetry<T, R> extends RetryAlgorithm<T, R> {
 
