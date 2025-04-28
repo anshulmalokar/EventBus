@@ -1,39 +1,49 @@
-# EventBus Java Project
+# Kafka-like Message Broker in Java
 
-This is a Java-based EventBus system that satisfies the following requirements:
+This is a simplified in-memory message broker system written in Java, inspired by Apache Kafka. It supports basic pub-sub (publish-subscribe) functionality, with the ability to:
+
+- Create topics
+- Register publishers and subscribers
+- Publish messages to topics
+- Notify subscribers in real-time
+- Replay messages from the beginning using offset resets
 
 ## Features
 
-1. **Multiple Publishers and Subscribers**:  
-   Supports registration from multiple classes to the EventBus.
+- Thread-safe topic and subscriber management
+- Message publishing with subscriber notification
+- Late subscribers receive only future messages
+- Subscribers can reset their offset to reprocess all past messages
+- Multi-threaded message consumption using `ExecutorService`
 
-2. **Causal Ordering of Topics**:  
-   Ensures the correct sequence of events for each topic.
+## How It Works
 
-3. **Configurable Retry Attempts**:  
-   Supports retry logic for failed event delivery.
+### Topics
+- Topics are created via the `KafkaManager.createTopic(String name)` method. Each topic has an ID and name.
+- Each topic maintains its own list of messages. Messages are added via `Topic.addMessage(Message message)`.
 
-4. **Dead Letter Queue (DLQ)**:  
-   Events that cannot be delivered after retry attempts are sent to a dead letter queue.
+### Publishers
+- A publisher is responsible for publishing messages to topics. It implements the `IPublisher` interface, specifically the `publish(Topic topic, Message message)` method.
+- Publishers can create messages and push them to any available topic.
 
-5. **Idempotency on Event Receiving**:  
-   Ensures that event processing is idempotent (the same event is not processed multiple times).
+### Subscribers
+- A subscriber can subscribe to any existing topic via `KafkaManager.subscribe(String topicId, ISubscriber subscriber)`.
+- Once subscribed, the subscriber consumes messages from the topic in its own thread using the `onMessage(Message message)` method. Subscribers are notified when new messages are available.
+- The subscriber keeps track of the offset, which is the index of the last consumed message.
 
-6. **Pull and Push Models**:  
-   Supports both pull-based and push-based models for event delivery.
+### Offset Reset
+- A subscriber can reset its offset to re-consume messages from the beginning of the topic. This is done using the `KafkaManager.resetOffset(ISubscriber subscriber, String topicId)` method.
+- After the reset, the subscriber processes all messages from the start, allowing it to "replay" the messages.
 
-7. **Subscribe from Timestamp or Offset**:  
-   Subscribers can choose to start receiving events from a specific timestamp or offset.
+## Getting Started
 
-8. **Preconditions for Event Subscription**:  
-   Subscribers can define preconditions that must be met before receiving events.
+### Prerequisites
+- Java 8 or above is required to run this application.
+- No external dependencies are needed.
 
-## How to Set Up
+### Running the Application
 
-### 1. Clone the Repository
-
-Clone this repository to your local machine:
+1. Compile the Java files:
 
 ```bash
-git clone https://github.com/your-repository-url/eventbus-java.git
-
+javac main/java/*.java
